@@ -300,7 +300,7 @@ class DiscordBackend(ErrBot):
         # Hehe client.run cannot be used as we need more control.
         try:
             self.client.loop.run_until_complete(self.client.start(self.token))
-        except KeyboardInterrupt:
+        except (KeyboardInterrupt, RuntimeError) as e:
             self.client.loop.run_until_complete(self.client.logout())
             pending = asyncio.Task.all_tasks()
             gathered = asyncio.gather(*pending)
