@@ -171,7 +171,7 @@ class DiscordBackend(ErrBot):
 
     @asyncio.coroutine
     def on_message(self, msg: discord.Message):
-        err_msg = Message(msg.content)
+        err_msg = Message(msg.content, extras=msg.embeds)
         if msg.channel.is_private:
             err_msg.frm = DiscordPerson.from_user(msg.author)
             err_msg.to = self.bot_identifier
